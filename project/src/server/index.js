@@ -10,11 +10,12 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/', express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../../dist')));
 
-// your API calls
+app.get('*', async (req, res) => {
+  res.sendFile(path.join(__dirname, '../../dist', 'index.html'));
+});
 
-// example API call
 app.get('/rovers', async (req, res) => {
   const rover = req.query.rover;
   try {
