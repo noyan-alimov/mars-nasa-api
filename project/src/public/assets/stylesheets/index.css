@@ -5,10 +5,7 @@ body {
   flex-direction: column;
   font-family: Arial;
   min-height: 100vh;
-}
-
-header {
-  /* header styles */
+  background-color: #ffcdd2;
 }
 
 main {
@@ -16,23 +13,31 @@ main {
   padding: 20px;
 }
 
-footer {
-  /* footer styles */
+#section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-/* -------------------  TABLET  --------------------- */
-@media (min-width: 768px) {
-  /* use mobile */
+#description {
+  margin: 2rem 0;
 }
 
-/* -------------------  DESKTOP  -------------------- */
-
-@media (min-width: 1224px) {
-  /* use mobile */
+#rovers,
+#button {
+  font-size: 1.5rem;
 }
 
-/* -------------------  LARGE SCREENS  -------------- */
+#button {
+  cursor: pointer;
+}
 
-@media (min-width: 1824px) {
-  /* use mobile */
+#output {
+  margin-top: 5rem;
+}
+
+#roverInfo {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
 }

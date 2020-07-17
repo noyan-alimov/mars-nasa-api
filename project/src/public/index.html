@@ -9,10 +9,21 @@
 
   <body>
     <main>
-      <button id="button">Show Info</button>
-      <div id="root">
-        <h1>Loading...</h1>
-      </div>
+      <section id="section">
+        <h1 id="title">Mars API App</h1>
+        <h3 id="description">
+          Please choose Rover to see it's information and images
+        </h3>
+        <form id="form">
+          <select name="rovers" id="rovers">
+            <option value="curiosity">Curiosity</option>
+            <option value="opportunity">Opportunity</option>
+            <option value="spirit">Spirit</option>
+          </select>
+          <input type="submit" value="Show Info" id="button" />
+        </form>
+      </section>
+      <section id="root"></section>
     </main>
   </body>
 </html>

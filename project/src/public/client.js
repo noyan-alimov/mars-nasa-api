@@ -1,5 +1,6 @@
 const { Map, List } = require('immutable');
-const { Observable } = require('rxjs');
+import './assets/stylesheets/index.css';
+import './assets/stylesheets/resets.css';
 
 let store = Map({
   roverInfo: {},
@@ -19,20 +20,29 @@ const render = (root, state) => {
 
 const App = state => {
   const data = state.toObject();
+
   const roverInfo = data.roverInfo.toObject();
   const images = data.images.toArray();
 
   return `
-    <section>
-      <h1>Mars API App</h1>
-      ${showRoverInfo(roverInfo)}
-      ${showImages(images)}
-    </section>
+      <div id="output">
+        <div id="roverInfo">
+          ${showRoverInfo(roverInfo)}
+        </div>
+        <div id="images">
+          ${showImages(images)}
+        </div>
+      </div>
   `;
 };
 
-const button = document.getElementById('button');
-button.addEventListener('click', () => getRoverInfoAndImages());
+const form = document.getElementById('form');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const select = document.getElementById('rovers');
+  const rover = select.options[select.selectedIndex].value;
+  getRoverInfoAndImages(rover);
+});
 
 window.addEventListener('load', () => {
   render(root, store);
@@ -50,16 +60,24 @@ const showRoverInfo = roverInfo => {
 };
 
 const showImages = images => {
-  const imgs = images.map(image => {
+  let imagesSliced;
+
+  if (images.length > 6) {
+    imagesSliced = images.slice(0, 6);
+  } else {
+    imagesSliced = images;
+  }
+
+  const imgs = imagesSliced.map(image => {
     return `
-      <img src="${image}" height="100px" width="100px" />
+      <img src="${image}" height="200px" width="200px" />
     `;
   });
   return imgs;
 };
 
-const getRoverInfoAndImages = () => {
-  fetch(`http://localhost:3000/rovers?rover=spirit`)
+const getRoverInfoAndImages = rover => {
+  fetch(`http://localhost:3000/rovers?rover=${rover}`)
     .then(res => res.json())
     .then(data => {
       const photos = List(data.photos);
